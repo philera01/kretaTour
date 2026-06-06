@@ -47,7 +47,7 @@ header p{font-size:.875rem;color:var(--muted);margin-top:.4rem}
 <div class="page">
 <header>
   <h1>Oslo → Kreta 2026 — Utstyrsliste</h1>
-  <p>Tesla Model Y · 18 dager · 9 land · ~8 200 km · 29. juni – 17. juli</p>
+  <p>Tesla Model Y · 18 dager · 9 land · ~8 200 km · 29. juni – 17. juli <span id="sync" style="margin-left:1rem;font-size:.8rem"></span></p>
 </header>
 <div class="stats">
   <div class="stat"><div class="sl">Totalt</div><div class="sv" id="st">0</div></div>
@@ -170,11 +170,48 @@ const D=[
 ]},
 ];
 
-let chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}'),fil='all';
-function save(){localStorage.setItem('kreta_chk',JSON.stringify(chk));}
+const TOKEN=location.hash.slice(1);
+const REPO='philera01/kretaTour';
+const FILE='state.json';
+let chk={},fil='all',fileSha=null,saveTimer;
+
+function saveLocal(){localStorage.setItem('kreta_chk',JSON.stringify(chk));}
+
+async function loadState(){
+  if(!TOKEN){chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}');return;}
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:{Authorization:`Bearer ${TOKEN}`}});
+    if(r.ok){const d=await r.json();fileSha=d.sha;chk=JSON.parse(atob(d.content.replace(/\s/g,'')));}
+  }catch(e){chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}');}
+}
+
+function syncStatus(s){
+  const el=document.getElementById('sync');if(!el)return;
+  el.textContent=s==='syncing'?'↑ Lagrer…':s==='saved'?'✓ Lagret':'⚠ Feil';
+  el.style.color=s==='error'?'#c00':s==='saved'?'#2B5F3E':'#7A766E';
+}
+
+async function pushState(){
+  saveLocal();
+  if(!TOKEN)return;
+  clearTimeout(saveTimer);
+  syncStatus('syncing');
+  saveTimer=setTimeout(async()=>{
+    try{
+      const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{
+        method:'PUT',
+        headers:{Authorization:`Bearer ${TOKEN}`,'Content-Type':'application/json'},
+        body:JSON.stringify({message:'Update checklist',content:btoa(JSON.stringify(chk)),...(fileSha?{sha:fileSha}:{})})
+      });
+      if(r.ok){const d=await r.json();fileSha=d.content.sha;syncStatus('saved');}
+      else syncStatus('error');
+    }catch(e){syncStatus('error');}
+  },800);
+}
+
 function tagEl(t){if(t==='3d')return'<span class="tag t3d">3D-print</span>';if(t==='buy')return'<span class="tag tbu">Kjøp</span>';return'<span class="tag tch">Sjekk/hent</span>';}
 function filt(f,btn){fil=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');render();}
-function tog(id){chk[id]=!chk[id];save();render();}
+function tog(id){chk[id]=!chk[id];pushState();render();}
 function render(){
   const all=D.flatMap(s=>s.i);
   const tot=all.length,done=Object.values(chk).filter(Boolean).length;
@@ -204,7 +241,7 @@ function render(){
   });
   document.getElementById('L').innerHTML=html;
 }
-render();
+loadState().then(()=>render());
 </script>
 </body>
 </html>
