@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utstyrsliste – Oslo → Kreta 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F5F2EB;--surface:#fff;--border:#D8D3C8;--text:#1A1814;--muted:#7A766E;--accent:#2B5F3E;--print:#5B3E8F;--print-light:#EEE9F8;--buy:#1A5E8F;--buy-light:#E6F0F8;--check:#8F5E1A;--check-light:#F8F0E6}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem}
+.page{max-width:800px;margin:0 auto}
+header{margin-bottom:2rem}
+header h1{font-family:'DM Mono',monospace;font-size:1.4rem;font-weight:500;letter-spacing:-.02em}
+header p{font-size:.875rem;color:var(--muted);margin-top:.4rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem}
+.sl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.sv{font-family:'DM Mono',monospace;font-size:1.6rem;font-weight:500;margin-top:2px}
+.pbar{height:4px;background:var(--border);border-radius:2px;margin-bottom:1.5rem;overflow:hidden}
+.pfill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.fb{padding:6px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s}
+.fb:hover{border-color:var(--text);color:var(--text)}
+.fb.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.sec{margin-bottom:1.25rem}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;background:var(--text);color:var(--bg);border-radius:8px 8px 0 0}
+.sh h2{font-size:13px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.sh span{font-family:'DM Mono',monospace;font-size:12px;opacity:.6}
+.sb{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow:hidden}
+.it{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+.it:last-child{border-bottom:none}
+.it:hover{background:#FAFAF8}
+.cb{width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.cb.on{background:var(--accent);border-color:var(--accent)}
+.iname{font-size:14px;font-weight:500}
+.iname.x{text-decoration:line-through;color:var(--muted)}
+.inote{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+.tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;align-self:flex-start;margin-top:2px;flex-shrink:0}
+.t3d{background:var(--print-light);color:var(--print)}
+.tbu{background:var(--buy-light);color:var(--buy)}
+.tch{background:var(--check-light);color:var(--check)}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>Oslo → Kreta 2026 — Utstyrsliste</h1>
+  <p>Tesla Model Y · 18 dager · 9 land · ~8 200 km · 29. juni – 17. juli</p>
+</header>
+<div class="stats">
+  <div class="stat"><div class="sl">Totalt</div><div class="sv" id="st">0</div></div>
+  <div class="stat"><div class="sl">Ferdig</div><div class="sv" id="sd">0</div></div>
+  <div class="stat"><div class="sl">3D-print</div><div class="sv" id="s3">0</div></div>
+  <div class="stat"><div class="sl">Kjøpes</div><div class="sv" id="sb">0</div></div>
+</div>
+<div class="pbar"><div class="pfill" id="pf" style="width:0%"></div></div>
+<div class="filters">
+  <button class="fb on" onclick="filt('all',this)">Alle</button>
+  <button class="fb" onclick="filt('3d',this)">3D-print</button>
+  <button class="fb" onclick="filt('buy',this)">Kjøp</button>
+  <button class="fb" onclick="filt('chk',this)">Sjekk/hent</button>
+</div>
+<div id="L"></div>
+</div>
+<script>
+const D=[
+{c:"3D-print til bilen",i:[
+{n:"Solbrilleholder",x:"Søk 'Tesla Model Y sunglass holder' på Printables.com",t:"3d"},
+]},
+{c:"Teknisk og lading",i:[
+{n:"Schuko → Type 2 nødladekabel (10m)",x:"Maks 2,3 kW fra stikkontakt — greit i nødsfall",t:"buy"},
+{n:"Powerbank 20 000 mAh+ med USB-C PD",x:"Telefoner og nettbrett på ferge",t:"buy"},
+{n:"USB-hub til bilen (USB-A + USB-C)",x:"Tesla har begrenset antall porter — lader flere enheter samtidig",t:"buy"},
+{n:"Offline kart lastet ned (Kreta + Hellas)",x:"Tesla-appen OG Google Maps — dårlig dekning i fjellene",t:"chk"},
+]},
+{c:"Kamera og drone",i:[
+{n:"Kamerautstyr (kamera, linser, lader)",x:"Sjekk batterier, minnekort og lader før avreise",t:"chk"},
+{n:"Drone + kontroller + lader",x:"Sjekk regler: forbudt over Akropolis og fredede områder",t:"chk"},
+{n:"Ekstra batterier / powerbank til drone",x:"Droneflygning tapper batteri raskt i varmen",t:"buy"},
+{n:"Minnekort (ekstra)",x:"Ta med nok kapasitet — sletter sjelden på farten",t:"buy"},
+]},
+{c:"SUP og vannsport",i:[
+{n:"SUP-brett (oppblåsbart)",x:"Tar lite plass i bagasjerom — perfekt for Kreta og Split",t:"chk"},
+{n:"Redningsvest (2 stk)",x:"Én til hver — anbefalt ved SUP, særlig i havstrøm",t:"buy"},
+{n:"Elektrisk pumpe til SUP",x:"Blåser opp brettet på få minutter — ta med ladeledning",t:"buy"},
+{n:"SUP-åre (justerbar)",x:"Sjekk at den er med og i orden",t:"chk"},
+{n:"Leash til SUP-brett",x:"Sikkerhetsstropp rundt ankelen — viktig i bølger",t:"chk"},
+]},
+{c:"Komfort på ferge og i bilen",i:[
+{n:"Solskjerming Tesla",x:"Solskjerming til frontrute og vinduer — viktig i Kreta-varmen",t:"chk"},
+{n:"Nakkepute (2 stk)",x:"Viktig: Bari→Patras er reclining seats — ingen lugar!",t:"buy"},
+{n:"Ørepropper eller støyreduserende hodetelefoner",x:"Salongene på nattferge lyser og larmer hele natten",t:"buy"},
+{n:"Øyemaske / sovemaske (2 stk)",x:"For nattfergen Bari→Patras",t:"buy"},
+{n:"Lett reisepledd",x:"AC om bord kan være kaldt selv i juli",t:"buy"},
+{n:"Sammenleggbar dagssekk 20L",x:"Sightseeing i Athen, Chania og Split",t:"buy"},
+{n:"Bagasjeromsnett / organizer",x:"Holder utstyr på plass på lange etapper",t:"buy"},
+{n:"Våtservietter",x:"Nyttig i bilen, på stranden og ved piknik",t:"buy"},
+{n:"Tepper (2 stk)",x:"Til piknik, strand eller kalde kvelder",t:"chk"},
+{n:"Puter (2 stk)",x:"Til bilen og overnatting — sjekk at de er pakket",t:"chk"},
+{n:"Campingstoler (2 stk)",x:"Sammenleggbare — perfekt til strand, piknik og pauser",t:"chk"},
+{n:"Små poser til søppel",x:"Hold bilen ryddig på lange etapper",t:"buy"},
+{n:"Fryseelementer",x:"Til kjølebagen — hold mat og drikke kaldt",t:"chk"},
+{n:"Badehåndklær (2 stk)",x:"Store og raske å tørke med",t:"chk"},
+{n:"Piknikksekk med utstyr",x:"Inkl. vinopptrekker, glass, brødkniv — sjekk at alt er med",t:"chk"},
+{n:"Hodelykt (2 stk)",x:"Nyttig på ferge, campingplass og turer i mørket",t:"buy"},
+{n:"Vanntett veske / drybag",x:"Til strand og SUP — beskytter telefon, nøkler og verdisaker",t:"buy"},
+{n:"Liten dagveske / crossbody-bag",x:"Til sightseeing i Athen, Chania og Split",t:"chk"},
+]},
+{c:"Sol, varme og Kreta",i:[
+{n:"Solkrem SPF 50+ (minst 2 store flasker)",x:"35–40 grader på Kreta i juli — bruk mye og ofte!",t:"buy"},
+{n:"Solhatt / caps (2 stk)",x:"Én til hver",t:"buy"},
+{n:"Solbriller med UV-beskyttelse",x:"Sjekk at begge har det — og at holderen er printet",t:"chk"},
+{n:"Badetøy (2–3 sett per person)",x:"Elafonissi, Bali-stranden og spontane badeplasser",t:"chk"},
+{n:"Snorkelutstyr (2 sett)",x:"Elafonissi er perfekt for snorkling — tar lite plass",t:"buy"},
+{n:"Sandaler / flip-flops",x:"Til stranden og i gamlebyer",t:"chk"},
+{n:"Vandresko med god støtte (innkjørte!)",x:"Samaria-kløften er 16 km — absolutt nødvendig",t:"chk"},
+{n:"Isolert vannflaske 0,75–1L (2 stk)",x:"Fyll opp hele dagen — dehydrering skjer fort i varmen",t:"buy"},
+{n:"Elektrolyttabletter / sportsdrikk-pulver",x:"Viktig supplement ved sterk varme og vandring",t:"buy"},
+{n:"Mikrofiberhåndkle / strandmatte (2 stk)",x:"Rasktørkende og tar lite plass",t:"buy"},
+]},
+{c:"Dokumenter og papir",i:[
+{n:"Pass — sjekk utløpsdato!",x:"Minst 6 måneder igjen ved innreise til Hellas og Italia",t:"chk"},
+{n:"Grønt kort (forsikringsbevis)",x:"Mottatt — oppbevar i hanskerom OG OneNote",t:"chk"},
+{n:"Europeisk helsetrygdekort (EHIC)",x:"Bestill gratis på Helfo.no hvis ikke gjort",t:"chk"},
+{n:"Fergebilletter PDF × 4",x:"Print + lagret offline på telefon — ha begge deler",t:"chk"},
+{n:"Hotellbekreftelser samlet offline",x:"Print eller PDF i OneNote / Google Drive",t:"chk"},
+{n:"Kontaktnummer til forsikring og veihjelp",x:"Lagre i telefon OG skriv ned på papir",t:"chk"},
+{n:"XCover-forsikring Kreta (ref: Y9VEP-QPJ37-INS)",x:"Administreres på xcover.com",t:"chk"},
+]},
+{c:"Sikkerhet og bil",i:[
+{n:"Advarselstrekant",x:"Påbudt i alle land på ruten — sjekk at den er i bilen",t:"chk"},
+{n:"Refleksvester (2 stk)",x:"Påbudt i Italia, Hellas og Kroatia",t:"buy"},
+{n:"Førstehjelpskit",x:"Påbudt i Østerrike og Kroatia — sjekk at det er komplett",t:"buy"},
+{n:"Liten brannslukker til bilen",x:"Ikke påbudt, men anbefalt på lang reise",t:"buy"},
+{n:"USB-ladbar lommelykt",x:"Nyttig på ferge og ved nødsituasjoner",t:"buy"},
+{n:"Spylevæske (ekstra kanne)",x:"Fyll opp før avreise — varierende kvalitet i Sør-Europa",t:"buy"},
+{n:"Luftkompressor (bærbar, 12V)",x:"Uunnværlig ved punktering eller lavt dekktrykk",t:"buy"},
+{n:"Lappesaker / plugge-kit for dekk",x:"Rask midlertidig reparasjon ved pluggbar punktering",t:"buy"},
+{n:"Dekkskum (nødspray)",x:"Raskeste nødløsning ved punktering — kjøp f.eks. Holts Tyreweld",t:"buy"},
+{n:"Duct tape",x:"Fikser det meste midlertidig — bagasje, interiør, kabler",t:"buy"},
+{n:"Elektrikertape",x:"For ledninger og kabelreparasjon underveis",t:"buy"},
+{n:"Kabelbindere / strips (assortert)",x:"Hold kabler og utstyr på plass",t:"buy"},
+{n:"Dekktrykk-sjekk før avreise",x:"Full bil på lang tur — sjekk alle fire dekk",t:"chk"},
+]},
+{c:"Helse og hygiene",i:[
+{n:"Reiseapotek (paracet, ibuprofen, imodium, antihistamin, plaster)",x:"Samle i ett dedikert etui",t:"buy"},
+{n:"Solbrannsgel (aloe vera)",x:"Redder deg etter en lang dag på Elafonissi",t:"buy"},
+{n:"Myggolje / insektsmiddel",x:"Kreta i juli — særlig om kvelden ved stranden",t:"buy"},
+{n:"Hånddesinfeksjon (liten flaske)",x:"Nyttig på ferge og ved landeveisstopp",t:"buy"},
+{n:"Toalettsaker i reisestørrelse",x:"Hold vekten nede — fyller opp underveis",t:"chk"},
+]},
+{c:"Mat og drikke på veien",i:[
+{n:"Kjølebag til bilen",x:"Holder drikke kjølig på Kreta og lange etapper",t:"buy"},
+{n:"Reisesnacks (nøtter, sjokolade, kjeks)",x:"Sparer penger og tid på lange motorveietapper",t:"buy"},
+{n:"Reisekaffe-løsning (AeroPress eller kapsler)",x:"Til tidlige morgener og nattfergen uten lugar",t:"buy"},
+{n:"Gjenbrukbare bestikk",x:"Nyttig for picnic og mat fra marked",t:"buy"},
+]},
+{c:"Diverse praktisk",i:[
+{n:"P-skive (parkeringsskive)",x:"Nødvendig i mange byer i Sør-Europa",t:"buy"},
+{n:"Euro-mynt (€10–20) til bom-automater",x:"Noen manuelle bommer i Italia og Hellas tar ikke kort",t:"chk"},
+{n:"Østerrike digital vignett (asfinag.at)",x:"Kjøp online FØR du krysser grensen",t:"chk"},
+{n:"Slovenia digital vignett (dars.si)",x:"Kjøp online FØR du krysser grensen",t:"chk"},
+{n:"Reisevaskemiddel (lite, flytende)",x:"Håndvask av klær på hotell — sparer plass",t:"buy"},
+{n:"Paraply / regnjakke (sammenleggbar)",x:"Uventet regn i Nord-Italia og Kroatia",t:"chk"},
+{n:"Strømplugg-adapter (Type C/F)",x:"Hellas bruker Type C — sjekk at dere har riktig",t:"chk"},
+{n:"Zip-poser i ulike størrelser",x:"Strand, våte klær, smuss i bilen",t:"buy"},
+{n:"Vaskeklut / mikrofiberklut til bilen",x:"Vinduer og speil etter regn og insekter",t:"buy"},
+]},
+];
+
+let chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}'),fil='all';
+function save(){localStorage.setItem('kreta_chk',JSON.stringify(chk));}
+function tagEl(t){if(t==='3d')return'<span class="tag t3d">3D-print</span>';if(t==='buy')return'<span class="tag tbu">Kjøp</span>';return'<span class="tag tch">Sjekk/hent</span>';}
+function filt(f,btn){fil=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');render();}
+function tog(id){chk[id]=!chk[id];save();render();}
+function render(){
+  const all=D.flatMap(s=>s.i);
+  const tot=all.length,done=Object.values(chk).filter(Boolean).length;
+  document.getElementById('st').textContent=tot;
+  document.getElementById('sd').textContent=done;
+  document.getElementById('s3').textContent=all.filter(x=>x.t==='3d').length;
+  document.getElementById('sb').textContent=all.filter(x=>x.t==='buy').length;
+  document.getElementById('pf').style.width=tot?Math.round(done/tot*100)+'%':'0%';
+  let idx=0,html='';
+  D.forEach(sec=>{
+    const start=idx;
+    const vis=sec.i.filter(item=>fil==='all'||item.t===fil);
+    if(!vis.length){idx+=sec.i.length;return;}
+    html+=`<div class="sec"><div class="sh"><h2>${sec.c}</h2><span>${vis.length} stk</span></div><div class="sb">`;
+    sec.i.forEach((item,li)=>{
+      const gid=start+li;
+      if(fil!=='all'&&item.t!==fil){idx++;return;}
+      const d=chk[gid];
+      html+=`<div class="it" onclick="tog(${gid})">
+        <div class="cb${d?' on':''}">${d?'<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>
+        <div style="flex:1;min-width:0"><div class="iname${d?' x':''}">${item.n}</div><div class="inote">${item.x}</div></div>
+        ${tagEl(item.t)}
+      </div>`;
+      idx++;
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('L').innerHTML=html;
+}
+render();
+</script>
+</body>
+</html>
