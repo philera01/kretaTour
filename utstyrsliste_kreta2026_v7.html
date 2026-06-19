@@ -46,21 +46,21 @@ header p{font-size:.875rem;color:var(--muted);margin-top:.4rem}
 <body>
 <div class="page">
 <header>
-  <h1>Oslo → Kreta 2026 — Utstyrsliste</h1>
-  <p>Tesla Model Y · 18 dager · 9 land · ~8 200 km · 29. juni – 17. juli <span id="sync" style="margin-left:1rem;font-size:.8rem"></span></p>
+<h1>Oslo → Kreta 2026 — Utstyrsliste</h1>
+<p>Tesla Model Y · 18 dager · 9 land · ~8 200 km · 29. juni – 17. juli <span id="sync" style="margin-left:1rem;font-size:.8rem"></span></p>
 </header>
 <div class="stats">
-  <div class="stat"><div class="sl">Totalt</div><div class="sv" id="st">0</div></div>
-  <div class="stat"><div class="sl">Ferdig</div><div class="sv" id="sd">0</div></div>
-  <div class="stat"><div class="sl">3D-print</div><div class="sv" id="s3">0</div></div>
-  <div class="stat"><div class="sl">Kjøpes</div><div class="sv" id="sb">0</div></div>
+<div class="stat"><div class="sl">Totalt</div><div class="sv" id="st">0</div></div>
+<div class="stat"><div class="sl">Ferdig</div><div class="sv" id="sd">0</div></div>
+<div class="stat"><div class="sl">3D-print</div><div class="sv" id="s3">0</div></div>
+<div class="stat"><div class="sl">Kjøpes</div><div class="sv" id="sb">0</div></div>
 </div>
 <div class="pbar"><div class="pfill" id="pf" style="width:0%"></div></div>
 <div class="filters">
-  <button class="fb on" onclick="filt('all',this)">Alle</button>
-  <button class="fb" onclick="filt('3d',this)">3D-print</button>
-  <button class="fb" onclick="filt('buy',this)">Kjøp</button>
-  <button class="fb" onclick="filt('chk',this)">Sjekk/hent</button>
+<button class="fb on" onclick="filt('all',this)">Alle</button>
+<button class="fb" onclick="filt('3d',this)">3D-print</button>
+<button class="fb" onclick="filt('buy',this)">Kjøp</button>
+<button class="fb" onclick="filt('chk',this)">Sjekk/hent</button>
 </div>
 <div id="L"></div>
 </div>
@@ -163,78 +163,114 @@ const D=[
 {n:"Zip-poser i ulike størrelser",x:"Strand, våte klær, smuss i bilen",t:"buy"},
 {n:"Vaskeklut / mikrofiberklut til bilen",x:"Vinduer og speil etter regn og insekter",t:"buy"},
 ]},
+{c:"Klær og sko – henne",i:[
+{n:"Sommerkjoler / skjørt (6–7 stk)",x:"Lette og luftige — byvandring i Athen og Firenze, middager",t:"chk"},
+{n:"T-skjorter / topper (8–9 stk)",x:"Gjerne et par tekniske som tørker fort",t:"chk"},
+{n:"Shorts (3 par) + lette langbukser (2 par)",x:"Linbukse/bomull — kirkebesøk krever dekkede knær",t:"chk"},
+{n:"Treningssett × 2 (shorts/tights + teknisk trøye)",x:"Samariagjelet 8. juli — viktig med innkjørt og luftig stoff",t:"chk"},
+{n:"Bikinier / badedrakter (2–3 stk)",x:"Én tørker mens den andre brukes",t:"chk"},
+{n:"Truser (10–11) og BH-er (4–5, inkl. sports-BH)",x:"Dekker hele perioden mellom vaskene",t:"chk"},
+{n:"Sokker (10 par, inkl. 2 par tursokker)",x:"Tursokker reservert til Samaria",t:"chk"},
+{n:"Tynn fleece + cardigan/genser",x:"Fergedekk om kvelden, aircondition, Brennerpasset",t:"chk"},
+{n:"Lett vind- og regnjakke",x:"Nord-Europa på returetappen",t:"chk"},
+{n:"Pysj / nattøy (2 sett)",x:"",t:"chk"},
+{n:"Sarong/strandkjole + sjal",x:"Funker som soltildekning, kirkebesøk og fergeteppe",t:"chk"},
+{n:"Penere antrekk til middag",x:"En kjole som tåler å ligge sammenkrøllet i bagasjen",t:"chk"},
+{n:"Solhatt med bred brem + solbriller",x:"",t:"chk"},
+{n:"Innegåtte tursko/joggesko med godt grep",x:"Obligatorisk til Samariagjelet — ikke nye, skal være innkjørte",t:"chk"},
+{n:"Gode gåsandaler",x:"Athen og Firenze blir mange km på asfalt",t:"chk"},
+{n:"Badesko",x:"Steinete partier på enkelte strender på Kreta",t:"chk"},
+{n:"Flip-flops / dusjsko",x:"Strand, ferge, hotellrom",t:"chk"},
+{n:"Pene sandaler/sko til middag",x:"",t:"chk"},
+]},
+{c:"Klær og sko – ham",i:[
+{n:"T-skjorter / topper (8–9 stk)",x:"Gjerne et par tekniske som tørker fort",t:"chk"},
+{n:"Shorts (3 par) + lette bukser (2 par)",x:"Linbukse/chino — kirkebesøk krever dekkede knær",t:"chk"},
+{n:"Treningssett × 2 (shorts/tights + teknisk trøye)",x:"Samariagjelet 8. juli — viktig med innkjørt og luftig stoff",t:"chk"},
+{n:"Badeshorts (1–2 par)",x:"",t:"chk"},
+{n:"Boxer/truser (10–11) og sokker (10 par, inkl. 2 par tursokker)",x:"Tursokker reservert til Samaria",t:"chk"},
+{n:"Tynn fleece + lett genser",x:"Fergedekk om kvelden, aircondition, Brennerpasset",t:"chk"},
+{n:"Lett vind- og regnjakke",x:"Nord-Europa på returetappen",t:"chk"},
+{n:"Pysj / nattøy (2 sett)",x:"",t:"chk"},
+{n:"Penere skjorte + ev. bukse til middag",x:"",t:"chk"},
+{n:"Solhatt/caps + solbriller",x:"",t:"chk"},
+{n:"Innegåtte tursko/joggesko med godt grep",x:"Obligatorisk til Samariagjelet — ikke nye, skal være innkjørte",t:"chk"},
+{n:"Gode gåsandaler",x:"Athen og Firenze blir mange km på asfalt",t:"chk"},
+{n:"Badesko",x:"Steinete partier på enkelte strender på Kreta",t:"chk"},
+{n:"Flip-flops / dusjsko",x:"Strand, ferge, hotellrom",t:"chk"},
+{n:"Pene sko/sandaler til middag",x:"",t:"chk"},
+]},
+{c:"Vask og klespleie",i:[
+{n:"Håndvaskmiddel (liten pose, f.eks. Sink Suds)",x:"Til håndvask av treningsklær/bikinier mellom maskinvaskene",t:"buy"},
+{n:"Komprimerbar vaskepose til skittentøy",x:"",t:"buy"},
+{n:"Kleshengere / mini-klessnor (4–6 stk)",x:"Tørking på balkongen i Platanias — varmen gjør jobben fort",t:"buy"},
+]},
 ];
-
 const TOKEN=location.hash.slice(1);
 const REPO='philera01/kretaTour';
 const FILE='state.json';
 let chk={},fil='all',fileSha=null,saveTimer;
-
 function saveLocal(){localStorage.setItem('kreta_chk',JSON.stringify(chk));}
-
 async function loadState(){
-  if(!TOKEN){chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}');return;}
-  try{
-    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:{Authorization:`Bearer ${TOKEN}`}});
-    if(r.ok){const d=await r.json();fileSha=d.sha;chk=JSON.parse(atob(d.content.replace(/\s/g,'')));}
-  }catch(e){chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}');}
+if(!TOKEN){chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}');return;}
+try{
+const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:{Authorization:`Bearer ${TOKEN}`}});
+if(r.ok){const d=await r.json();fileSha=d.sha;chk=JSON.parse(atob(d.content.replace(/\s/g,'')));}
+}catch(e){chk=JSON.parse(localStorage.getItem('kreta_chk')||'{}');}
 }
-
 function syncStatus(s){
-  const el=document.getElementById('sync');if(!el)return;
-  el.textContent=s==='syncing'?'↑ Lagrer…':s==='saved'?'✓ Lagret':'⚠ Feil';
-  el.style.color=s==='error'?'#c00':s==='saved'?'#2B5F3E':'#7A766E';
+const el=document.getElementById('sync');if(!el)return;
+el.textContent=s==='syncing'?'↑ Lagrer…':s==='saved'?'✓ Lagret':'⚠ Feil';
+el.style.color=s==='error'?'#c00':s==='saved'?'#2B5F3E':'#7A766E';
 }
-
 async function pushState(){
-  saveLocal();
-  if(!TOKEN)return;
-  clearTimeout(saveTimer);
-  syncStatus('syncing');
-  saveTimer=setTimeout(async()=>{
-    try{
-      const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{
-        method:'PUT',
-        headers:{Authorization:`Bearer ${TOKEN}`,'Content-Type':'application/json'},
-        body:JSON.stringify({message:'Update checklist',content:btoa(JSON.stringify(chk)),...(fileSha?{sha:fileSha}:{})})
-      });
-      if(r.ok){const d=await r.json();fileSha=d.content.sha;syncStatus('saved');}
-      else syncStatus('error');
-    }catch(e){syncStatus('error');}
-  },800);
+saveLocal();
+if(!TOKEN)return;
+clearTimeout(saveTimer);
+syncStatus('syncing');
+saveTimer=setTimeout(async()=>{
+try{
+const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{
+method:'PUT',
+headers:{Authorization:`Bearer ${TOKEN}`,'Content-Type':'application/json'},
+body:JSON.stringify({message:'Update checklist',content:btoa(JSON.stringify(chk)),...(fileSha?{sha:fileSha}:{})})
+});
+if(r.ok){const d=await r.json();fileSha=d.content.sha;syncStatus('saved');}
+else syncStatus('error');
+}catch(e){syncStatus('error');}
+},800);
 }
-
 function tagEl(t){if(t==='3d')return'<span class="tag t3d">3D-print</span>';if(t==='buy')return'<span class="tag tbu">Kjøp</span>';return'<span class="tag tch">Sjekk/hent</span>';}
 function filt(f,btn){fil=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');render();}
 function tog(id){chk[id]=!chk[id];pushState();render();}
 function render(){
-  const all=D.flatMap(s=>s.i);
-  const tot=all.length,done=Object.values(chk).filter(Boolean).length;
-  document.getElementById('st').textContent=tot;
-  document.getElementById('sd').textContent=done;
-  document.getElementById('s3').textContent=all.filter(x=>x.t==='3d').length;
-  document.getElementById('sb').textContent=all.filter(x=>x.t==='buy').length;
-  document.getElementById('pf').style.width=tot?Math.round(done/tot*100)+'%':'0%';
-  let idx=0,html='';
-  D.forEach(sec=>{
-    const start=idx;
-    const vis=sec.i.filter(item=>fil==='all'||item.t===fil);
-    if(!vis.length){idx+=sec.i.length;return;}
-    html+=`<div class="sec"><div class="sh"><h2>${sec.c}</h2><span>${vis.length} stk</span></div><div class="sb">`;
-    sec.i.forEach((item,li)=>{
-      const gid=start+li;
-      if(fil!=='all'&&item.t!==fil){idx++;return;}
-      const d=chk[gid];
-      html+=`<div class="it" onclick="tog(${gid})">
-        <div class="cb${d?' on':''}">${d?'<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>
-        <div style="flex:1;min-width:0"><div class="iname${d?' x':''}">${item.n}</div><div class="inote">${item.x}</div></div>
-        ${tagEl(item.t)}
-      </div>`;
-      idx++;
-    });
-    html+='</div></div>';
-  });
-  document.getElementById('L').innerHTML=html;
+const all=D.flatMap(s=>s.i);
+const tot=all.length,done=Object.values(chk).filter(Boolean).length;
+document.getElementById('st').textContent=tot;
+document.getElementById('sd').textContent=done;
+document.getElementById('s3').textContent=all.filter(x=>x.t==='3d').length;
+document.getElementById('sb').textContent=all.filter(x=>x.t==='buy').length;
+document.getElementById('pf').style.width=tot?Math.round(done/tot*100)+'%':'0%';
+let idx=0,html='';
+D.forEach(sec=>{
+const start=idx;
+const vis=sec.i.filter(item=>fil==='all'||item.t===fil);
+if(!vis.length){idx+=sec.i.length;return;}
+html+=`<div class="sec"><div class="sh"><h2>${sec.c}</h2><span>${vis.length} stk</span></div><div class="sb">`;
+sec.i.forEach((item,li)=>{
+const gid=start+li;
+if(fil!=='all'&&item.t!==fil){idx++;return;}
+const d=chk[gid];
+html+=`<div class="it" onclick="tog(${gid})">
+<div class="cb${d?' on':''}">${d?'<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>
+<div style="flex:1;min-width:0"><div class="iname${d?' x':''}">${item.n}</div><div class="inote">${item.x}</div></div>
+${tagEl(item.t)}
+</div>`;
+idx++;
+});
+html+='</div></div>';
+});
+document.getElementById('L').innerHTML=html;
 }
 loadState().then(()=>render());
 </script>
